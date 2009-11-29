@@ -794,7 +794,8 @@ double fluid_estimate_cpu_frequency(void);
 void fluid_time_config(void)
 {
   if (fluid_cpu_frequency < 0.0) {
-    fluid_cpu_frequency = fluid_estimate_cpu_frequency() / 1000000.0;
+    // fluid_cpu_frequency = fluid_estimate_cpu_frequency() / 1000000.0;
+    fluid_cpu_frequency = 1.0 / 100000.0;
     if (fluid_cpu_frequency == 0.0) fluid_cpu_frequency = 1.0;
   }
 }
@@ -808,7 +809,8 @@ unsigned int fluid_curtime()
 
 double fluid_utime(void)
 {
-  return (rdtsc() / fluid_cpu_frequency);
+  // return (rdtsc() / fluid_cpu_frequency);
+  return 0;
 }
 
 #if !defined(__i386__)

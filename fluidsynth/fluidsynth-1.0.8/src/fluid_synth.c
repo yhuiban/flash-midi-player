@@ -1649,7 +1649,7 @@ fluid_synth_write_float(fluid_synth_t* synth, int len,
   float* right_out = (float*) rout;
   fluid_real_t* left_in = synth->left_buf[0];
   fluid_real_t* right_in = synth->right_buf[0];
-  double time = fluid_utime();
+  // double time = fluid_utime();
 
   /* make sure we're playing */
   if (synth->state != FLUID_SYNTH_PLAYING) {
@@ -1671,9 +1671,9 @@ fluid_synth_write_float(fluid_synth_t* synth, int len,
 
   synth->cur = l;
 
-  time = fluid_utime() - time;
+  /* time = fluid_utime() - time;
   synth->cpu_load = 0.5 * (synth->cpu_load +
-			   time * synth->sample_rate / len / 10000.0);
+			   time * synth->sample_rate / len / 10000.0); */
 
 /*   printf("CPU: %.2f\n", synth->cpu_load); */
 

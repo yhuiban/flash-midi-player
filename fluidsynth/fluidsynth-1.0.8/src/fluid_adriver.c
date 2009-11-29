@@ -96,7 +96,7 @@ fluid_audio_driver_t* new_fluid_sndmgr_audio_driver2(fluid_settings_t* settings,
 int delete_fluid_sndmgr_audio_driver(fluid_audio_driver_t* p);
 #endif
 
-#define AUFILE_SUPPORT 1
+// #define AUFILE_SUPPORT 1
 #if AUFILE_SUPPORT
 fluid_audio_driver_t* new_fluid_file_audio_driver(fluid_settings_t* settings,
 						  fluid_synth_t* synth);

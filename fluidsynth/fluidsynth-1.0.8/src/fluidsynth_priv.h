@@ -159,12 +159,12 @@ typedef enum {
 } fluid_status;
 
 
-#if defined(WIN32)
+/*#if defined(WIN32)
 typedef SOCKET fluid_socket_t;
-#else
+#else*/
 typedef int fluid_socket_t;
 #define INVALID_SOCKET -1
-#endif
+/*#endif*/
 
 
 /** Integer types  */

@@ -268,13 +268,13 @@ extern fluid_profile_data_t fluid_profile_data[];
     sample data.
  */
 
-#if HAVE_SYS_MMAN_H
+/*#if HAVE_SYS_MMAN_H
 #define fluid_mlock(_p,_n)      mlock(_p, _n)
 #define fluid_munlock(_p,_n)    munlock(_p,_n)
-#else
+#else*/
 #define fluid_mlock(_p,_n)      0
 #define fluid_munlock(_p,_n)
-#endif
+/*#endif*/
 
 
 /**
