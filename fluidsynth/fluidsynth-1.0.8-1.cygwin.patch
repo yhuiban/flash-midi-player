@@ -1,0 +1,129 @@
+diff -urN origsrc/fluidsynth-1.0.8/CYGWIN-PATCHES/README src/fluidsynth-1.0.8/CYGWIN-PATCHES/README
+--- origsrc/fluidsynth-1.0.8/CYGWIN-PATCHES/README	1969-12-31 18:00:00.000000000 -0600
++++ src/fluidsynth-1.0.8/CYGWIN-PATCHES/README	2008-07-18 02:41:26.093750000 -0500
+@@ -0,0 +1,96 @@
++fluidsynth
++------------------------------------------
++FluidSynth is a real-time software synthesizer based on the 
++SoundFont 2 specifications.
++
++Runtime requirements:
++  cygwin-1.5.25-15
++  libreadline6-5.2.12-10
++
++Build requirements:
++(besides corresponding -devel packages)
++  autoconf2.5-2.61-1
++  automake1.10-1.10.1-1
++  binutils-20080523-2
++  cygport-0.3.12-1
++  gawk-3.1.6-1
++  gcc-core-3.4.4-3
++  libtool-2.2.2-2
++  make-3.81-1
++  sed-4.1.5-2
++  w32api-3.11-1
++
++Canonical website:
++  http://fluidsynth.resonance.org/
++
++Canonical download:
++  http://download.savannah.gnu.org/releases/fluid/
++
++-------------------------------------------
++
++Build instructions:
++  unpack fluidsynth-1.0.8-X-src.tar.bz2
++    if you use setup to install this src package, it will be
++	 unpacked under /usr/src automatically
++  cd /usr/src
++  cygport ./fluidsynth-1.0.8-X.cygport all
++
++This will create:
++  /usr/src/fluidsynth-1.0.8-X-src.tar.bz2
++  /usr/src/fluidsynth-1.0.8-X.tar.bz2
++  /usr/src/libfluidsynth-devel-1.0.8-X.tar.bz2
++  /usr/src/libfluidsynth1-1.0.8-X.tar.bz2
++
++-------------------------------------------
++
++Files included in the binary packages:
++
++(fluidsynth)
++  /usr/bin/fluidsynth.exe
++  /usr/share/doc/fluidsynth-1.0.8/AUTHORS
++  /usr/share/doc/fluidsynth-1.0.8/COPYING
++  /usr/share/doc/fluidsynth-1.0.8/ChangeLog
++  /usr/share/doc/fluidsynth-1.0.8/INSTALL
++  /usr/share/doc/fluidsynth-1.0.8/NEWS
++  /usr/share/doc/fluidsynth-1.0.8/README
++  /usr/share/doc/fluidsynth-1.0.8/THANKS
++  /usr/share/doc/fluidsynth-1.0.8/TODO
++  /usr/share/man/man1/fluidsynth.1.gz
++
++(libfluidsynth1)
++  /usr/bin/cygfluidsynth-1.dll
++
++(libfluidsynth-devel)
++  /usr/include/fluidsynth.h
++  /usr/include/fluidsynth/audio.h
++  /usr/include/fluidsynth/event.h
++  /usr/include/fluidsynth/gen.h
++  /usr/include/fluidsynth/log.h
++  /usr/include/fluidsynth/midi.h
++  /usr/include/fluidsynth/misc.h
++  /usr/include/fluidsynth/mod.h
++  /usr/include/fluidsynth/ramsfont.h
++  /usr/include/fluidsynth/seq.h
++  /usr/include/fluidsynth/seqbind.h
++  /usr/include/fluidsynth/settings.h
++  /usr/include/fluidsynth/sfont.h
++  /usr/include/fluidsynth/shell.h
++  /usr/include/fluidsynth/synth.h
++  /usr/include/fluidsynth/types.h
++  /usr/include/fluidsynth/version.h
++  /usr/include/fluidsynth/voice.h
++  /usr/lib/libfluidsynth.a
++  /usr/lib/libfluidsynth.dll.a
++  /usr/lib/libfluidsynth.la
++  /usr/lib/pkgconfig/fluidsynth.pc
++
++------------------
++
++Port Notes:
++
++----- version 1.0.8-1 -----
++Initial release for Cygwin.
++
++
++Cygwin port maintained by:
++http://cygwinports.dotsrc.org/
+diff -urN origsrc/fluidsynth-1.0.8/CYGWIN-PATCHES/bin.hint src/fluidsynth-1.0.8/CYGWIN-PATCHES/bin.hint
+--- origsrc/fluidsynth-1.0.8/CYGWIN-PATCHES/bin.hint	1969-12-31 18:00:00.000000000 -0600
++++ src/fluidsynth-1.0.8/CYGWIN-PATCHES/bin.hint	2008-07-18 02:43:24.921875000 -0500
+@@ -0,0 +1,5 @@
++category: Audio
++requires: cygwin libfluidsynth1
++sdesc: "SoundFont software synthesizer (app)"
++ldesc: "FluidSynth is a real-time software synthesizer based on the
++SoundFont 2 specifications."
+diff -urN origsrc/fluidsynth-1.0.8/CYGWIN-PATCHES/devel.hint src/fluidsynth-1.0.8/CYGWIN-PATCHES/devel.hint
+--- origsrc/fluidsynth-1.0.8/CYGWIN-PATCHES/devel.hint	1969-12-31 18:00:00.000000000 -0600
++++ src/fluidsynth-1.0.8/CYGWIN-PATCHES/devel.hint	2008-07-18 02:41:26.093750000 -0500
+@@ -0,0 +1,6 @@
++category: Audio
++requires: cygwin libfluidsynth1 readline w32api
++external-source: fluidsynth
++sdesc: "SoundFont software synthesizer (libdevel)"
++ldesc: "FluidSynth is a real-time software synthesizer based on the
++SoundFont 2 specifications."
+diff -urN origsrc/fluidsynth-1.0.8/CYGWIN-PATCHES/lib.hint src/fluidsynth-1.0.8/CYGWIN-PATCHES/lib.hint
+--- origsrc/fluidsynth-1.0.8/CYGWIN-PATCHES/lib.hint	1969-12-31 18:00:00.000000000 -0600
++++ src/fluidsynth-1.0.8/CYGWIN-PATCHES/lib.hint	2008-07-18 02:41:26.093750000 -0500
+@@ -0,0 +1,6 @@
++category: Audio
++requires: cygwin libreadline6
++external-source: fluidsynth
++sdesc: "SoundFont software synthesizer (runtime)"
++ldesc: "FluidSynth is a real-time software synthesizer based on the
++SoundFont 2 specifications."
