@@ -61,20 +61,20 @@ package {
 		public function start():void {
 			stop();
 			_sound = new Sound();
-			_sound.addEventListener(SampleDataEvent.SAMPLE_DATA,sineWavGenerator);
+			_sound.addEventListener(SampleDataEvent.SAMPLE_DATA,samplesGenerator);
 			channel = _sound.play();
 			channel.addEventListener(Event.SOUND_COMPLETE, eventCompleteHandler);
 		}
 		
 		public function stop():void {
 			if (_sound) {
-				_sound.removeEventListener(SampleDataEvent.SAMPLE_DATA, sineWavGenerator);
+				_sound.removeEventListener(SampleDataEvent.SAMPLE_DATA, samplesGenerator);
 				channel.removeEventListener(Event.SOUND_COMPLETE , eventCompleteHandler);
 				_sound = null;
 			}
 		}
 		
-		private function sineWavGenerator(event:SampleDataEvent):void {
+		private function samplesGenerator(event:SampleDataEvent):void {
 			var rawSampleData:ByteArray = new ByteArray();
 			
 			rawSampleData.endian = Endian.LITTLE_ENDIAN;
