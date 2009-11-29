@@ -1,0 +1,18 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Using the synthesizer without an audio driver</title><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><meta name="keywords" content="FluidSynth, software, synthesizer, SoundFont, Linux, audio, development, documentation, HOWTO"><link rel="start" href="index.html" title="FluidSynth 1.0 &#8212; Developer Documentation"><link rel="up" href="index.html" title="FluidSynth 1.0 &#8212; Developer Documentation"><link rel="prev" href="ar01s05.html" title="Creating the audio driver"><link rel="next" href="ar01s07.html" title="Loading and managing SoundFonts"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Using the synthesizer without an audio driver</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s05.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s07.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2555835"></a>Using the synthesizer without an audio driver</h2></div></div></div><p>
+    It is possible to use the synthesizer object without creating an
+    audio driver. This is desirable if the application using
+    FluidSynth manages the audio output itself. The synthesizer has
+    several API functions that can be used to obtain the audio output:
+    </p><p>
+    <code class="function">fluid_synth_write_s16</code> fills two buffers (left
+    and right channel) with samples coded as signed 16 bits (the
+    endian-ness is machine
+    dependent). <code class="function">fluid_synth_write_float</code> fills a
+    left and right audio buffer with 32 bits floating point
+    samples. For multi channel audio output, the function
+    <code class="function">fluid_synth_nwrite_float</code> has to be used.
+    </p><p>
+    The function <code class="function">fluid_synth_process</code> is still
+    experimental and its use is therefore not recommended but it will
+    probably become the generic interface in future versions.  
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s05.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ar01s07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Creating the audio driver </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Loading and managing SoundFonts</td></tr></table></div></body></html>

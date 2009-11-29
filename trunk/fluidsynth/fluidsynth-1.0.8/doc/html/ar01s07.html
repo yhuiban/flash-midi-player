@@ -1,0 +1,67 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Loading and managing SoundFonts</title><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><meta name="keywords" content="FluidSynth, software, synthesizer, SoundFont, Linux, audio, development, documentation, HOWTO"><link rel="start" href="index.html" title="FluidSynth 1.0 &#8212; Developer Documentation"><link rel="up" href="index.html" title="FluidSynth 1.0 &#8212; Developer Documentation"><link rel="prev" href="ar01s06.html" title="Using the synthesizer without an audio driver"><link rel="next" href="ar01s08.html" title="Sending MIDI events"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Loading and managing SoundFonts</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s06.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s08.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2555889"></a>Loading and managing SoundFonts</h2></div></div></div><p>
+    Before any sound can be produced, the synthesizer needs a
+    SoundFont. For a discussion on SoundFont please refer to some
+    other, not yet existing, therefore virtual document.
+    </p><p>
+    SoundFonts are loaded with the
+    <code class="function">fluid_synth_sfload</code> function. The function
+    takes the path to a SoundFont file as argument and a boolean to
+    indicate whether the presets of the MIDI channels should be
+    updated after the SoundFont is loaded. More on the preset updates
+    below.
+    </p><p>
+    The synthesizer can load any number of SoundFonts. This is an
+    advantage, of course, but there are some issues that you must be
+    aware of. The presets in a SoundFont are identified by their bank
+    and preset number. The MIDI specifications allows the change of a
+    preset on a MIDI channel using the combination of "bank select"
+    and the "program change" messages. An ambiguity arrizes when a
+    preset with a specific bank and preset number is defined in
+    multiple loaded SoundFonts. This is solved by searching the
+    SoundFonts in the inverse order they were loaded, i.e. the lastly
+    loaded SoundFont is searched first for the request preset
+    (identified by bank and preset number) then the on but last loaded
+    SoundFont, and so on until. The first preset found is then
+    used. You can somehow consider the SoundFonts placed on a
+    stack. The SoundFont on top of the stack is inspected first,
+    followed by the SoundFont down on the stack. Newly loaded
+    SoundFonts are always placed on top of the stack. This is how
+    commercial, hardware synthesizers work. The inconvenience is that
+    a preset in a SoundFont at the bottom end of the stack may be
+    masked by a preset in a SoundFont at the top of the stack. Using
+    the standard MIDI messages, bank select and program change, there
+    is no way to select a masked preset. However, FluidSynth has an
+    API function to unambiguously select a preset
+    (<code class="function">fluid_synth_program_select</code>). This function
+    is not invokeable through MIDI messages, though.  
+    </p><p>
+    The <code class="function">fluid_synth_sfload</code> function returns the
+    unique identifier of the loaded SoundFont, or -1 in case of an
+    error. This identifier is used in subsequent management functions:
+    <code class="function">fluid_synth_sfunload</code> removes the SoundFont,
+    <code class="function">fluid_synth_sfreload</code> reloads the
+    SoundFont. When a SoundFont is reloaded, it retains it's ID and
+    position on the SoundFont stack.  
+    </p><p>
+    Additional API functions are provided to get the number of loaded
+    SoundFonts ot to get a pointer to the SoundFont.
+    </p><p>
+    Another issue that needs some explanation is the reprogramming of
+    the presets after a SoundFont load or unload. The default behavior
+    of commercial synthesizers is to reset all the preset that are
+    programmed on the MIDI channels when a SoundFont is loaded or
+    unloaded. Consider the case where MIDI channel 1 uses preset (0,
+    0) (the couple indicates the bank and program number). This preset
+    was found in the SoundFont with ID 3, for example. When a new
+    SoundFont is loaded that also contains a preset with bank number 0
+    and program number 0, then the newly loaded preset will be used on
+    channel 1 for future events. This behavior is as if a bank select
+    and program change message is send to all channels after a
+    load/unload using the channel's bank and program number. This may
+    be sometimes confusing or unwanted. A user may not want to loose
+    its preset setup when a new SoundFont is loaded. To avoid the
+    reprogramming of the presets, the third parameter to the
+    <code class="function">fluid_synth_sfload</code> and
+    <code class="function">fluid_synth_sfunload</code> functions should be set
+    to zero.  
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s06.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ar01s08.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Using the synthesizer without an audio driver </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Sending MIDI events</td></tr></table></div></body></html>

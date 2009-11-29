@@ -1,0 +1,41 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Creating and changing the settings</title><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><meta name="keywords" content="FluidSynth, software, synthesizer, SoundFont, Linux, audio, development, documentation, HOWTO"><link rel="start" href="index.html" title="FluidSynth 1.0 &#8212; Developer Documentation"><link rel="up" href="index.html" title="FluidSynth 1.0 &#8212; Developer Documentation"><link rel="prev" href="ar01s02.html" title="Introduction"><link rel="next" href="ar01s04.html" title="Creating the synthesizer"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Creating and changing the settings</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s02.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s04.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2546293"></a>Creating and changing the settings</h2></div></div></div><p>
+    Before you can use the synthesizer, you have to create a settings
+    object. The settings objects is used by all components of the
+    FluidSynth library. It gives a unified API to set the parameters
+    of the audio drivers, the midi drivers, the synthesizer,
+    andsoforth. A number of default settings are defined by the
+    current implementation. In future versions, the use of the
+    settings will probably be generalized.</p><p>
+    All settings have a name that follows the "dotted-name"
+    notation. For example, "synth.polyphony" refers to the number of
+    voices (polyphony) preallocated by the synthesizer. The settings
+    also have a type. There are currently three types: strings,
+    numbers (double floats), and integers. You can change the values
+    of a setting using the <code class="function">fluid_settings_setstr</code>,
+    <code class="function">fluid_settings_setnum</code>, and
+    <code class="function">fluid_synth_setint</code> functions. For example:
+
+</p><pre class="programlisting">
+#include &lt;fluidsynth.h&gt;
+
+int main(int argc, char** argv) 
+{
+  fluid_settings_t* settings = new_fluid_settings();
+
+  fluid_synth_setint(settings, "synth.polyphony", 128);
+
+  delete_fluid_settings(settings);
+  return 0;
+}
+</pre><p>
+
+    </p><p>
+    The API contains the functions to query the type, the current
+    value, the default value, the range and the "hints" of a
+    setting. The range is the minumum and maximum value of the
+    setting. The hints gives additional information about a
+    setting. For example, whether a string represents a filename. Or
+    whether a number should be interpreted on on a logarithmic
+    scale. Check the API documentation for a description of all
+    functions.
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s02.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ar01s04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Introduction </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Creating the synthesizer</td></tr></table></div></body></html>

@@ -1,0 +1,57 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Sending MIDI events</title><meta name="generator" content="DocBook XSL Stylesheets V1.72.0"><meta name="keywords" content="FluidSynth, software, synthesizer, SoundFont, Linux, audio, development, documentation, HOWTO"><link rel="start" href="index.html" title="FluidSynth 1.0 &#8212; Developer Documentation"><link rel="up" href="index.html" title="FluidSynth 1.0 &#8212; Developer Documentation"><link rel="prev" href="ar01s07.html" title="Loading and managing SoundFonts"><link rel="next" href="ar01s09.html" title="Advanced features, not yet documented"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Sending MIDI events</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ar01s07.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ar01s09.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2556042"></a>Sending MIDI events</h2></div></div></div><p>
+    Once the synthesizer is up and running and a SoundFont is loaded,
+    most people will want to do something usefull with it. Make noise,
+    for example. The synthesizer aims to be compatible with the MIDI
+    standard, so it accepts almost all MIDI messages (details on the
+    MIDI compatibility elsewhere). The MIDI channel messages can be
+    send using the <code class="function">fluid_synth_noteon</code>,
+    <code class="function">fluid_synth_noteoff</code>,
+    <code class="function">fluid_synth_cc</code>,
+    <code class="function">fluid_synth_pitch_bend</code>,
+    <code class="function">fluid_synth_pitch_wheel_sens</code>, and
+    <code class="function">fluid_synth_program_change</code> functions. For
+    convenience, there's also a
+    <code class="function">fluid_synth_bank_select</code> function (the bank
+    select message is normally sent using a control change message).
+    </p><p>
+    The following example show a generic graphical button that plays a
+    not when clicked:
+
+</p><pre class="programlisting">
+class SoundButton : public SomeButton
+{
+public:	
+  
+  SoundButton() : SomeButton() {
+    if (!_synth) {
+       initSynth();
+    }
+  }
+
+  static void initSynth() {
+    _settings = new_fluid_settings();
+    _synth = new_fluid_synth(_settings);
+    _adriver = new_fluid_audio_driver(_settings, _synth);
+  }
+
+  /* ... */
+
+  virtual int handleMouseDown(int x, int y) {
+    /* Play a note on key 60 with velocity 100 on MIDI channel 0 */
+    fluid_synth_noteon(_synth, 0, 60, 100);
+  }
+
+  virtual int handleMouseUp(int x, int y) {
+    /* Release the note on key 60 */
+    fluid_synth_noteoff(_synth, 0, 60);
+  }
+
+
+protected:
+
+  static fluid_settings_t* _settings;
+  static fluid_synth_t* _synth;
+  static fluid_audio_driver_t* _adriver;
+};
+</pre><p>
+    </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ar01s07.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ar01s09.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Loading and managing SoundFonts </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Advanced features, not yet documented</td></tr></table></div></body></html>
