@@ -112,6 +112,12 @@ gcc fluidsynth_swc.o ${FLUIDSYNTH_DIR}/src/libfluidsynth_la-fluid_settings.o \
                      ${FLUIDSYNTH_DIR}/src/libfluidsynth_la-fluid_mod.o \
                      ${FLUIDSYNTH_DIR}/src/libfluidsynth_la-fluid_gen.o \
                      -lpthread -lm -swc -o fluidsynth_swc.swc
+cp fluidsynth_swc.swc ${FLASH_MIDI_PLAYER_DIR}/fluidsynthtest/lib
+
+Testing Fluidsynth:
+--------------------
+- Import the fluidsynthtest project into Flex Builder
+- Run the fluidsynthtest project: you chould hear a note playing...
 
 
 
